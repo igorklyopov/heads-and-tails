@@ -1,7 +1,11 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
+  const { pathname } = useRouter();
+
   return (
     <div className={styles.container}>
       <section className={styles.main}>
@@ -13,6 +17,9 @@ const HomePage = () => {
           accusantium nemo aut magni voluptatum aliquam, iusto reprehenderit
           quam nulla maxime.
         </p>
+        <Link href="/game">
+          <a>Go to game</a>
+        </Link>
       </section>
     </div>
   );
