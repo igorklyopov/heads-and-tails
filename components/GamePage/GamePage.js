@@ -5,12 +5,13 @@ import Round from '../Round/Round';
 
 const GamePage = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
+  
   const startGame = () => {
     setIsGameStarted(true);
   };
 
   return isGameStarted ? (
-    <Round />
+    <Round setIsGameStarted={setIsGameStarted} />
   ) : (
     <>
       <h1>Game</h1>

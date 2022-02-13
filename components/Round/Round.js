@@ -5,7 +5,7 @@ import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
 import styles from './Round.module.scss';
 
-const Round = () => {
+const Round = ({ setIsGameStarted }) => {
   const [isRoundStarted, setIsRoundStarted] = useState(true);
   const [roundCount, setRoundCount] = useState(1);
   const [coinTossCount, setCoinTossCount] = useState(0);
@@ -30,6 +30,8 @@ const Round = () => {
   };
 
   const finishRound = () => {
+    if (coinTossCount === 0 || showRoundStatistic) setIsGameStarted(false);
+
     const newRoundStatistic = {
       roundNumber: roundCount,
       coinTossNumber: coinTossCount,
