@@ -1,8 +1,10 @@
 import { useEffect, useState, useReducer, useCallback } from 'react';
 
-import { COIN_SIDES, MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
+
+import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
+import { COIN_SIDES, MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
 import styles from './Round.module.scss';
 
 const Round = ({ setIsGameStarted }) => {
@@ -65,6 +67,7 @@ const Round = ({ setIsGameStarted }) => {
       <section>
         {isRoundStarted ? (
           <>
+            <Coin />
             <h2>Round {roundCount}</h2>
             <p>Are you ready to rumble?</p>
             <button type="button" onClick={makeCoinToss}>

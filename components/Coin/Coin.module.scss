@@ -1,0 +1,30 @@
+.c {
+  position: absolute;
+  max-width: 500px;
+  max-height: 500px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.front,
+.back {
+  background-size: cover;
+}
+
+.back {
+  background-image: url(../../public/assets/images/coin-tail.svg);
+}
+
+.front {
+  background-image: url(../../public/assets/images/coin-head.svg);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
