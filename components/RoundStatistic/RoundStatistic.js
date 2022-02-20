@@ -1,7 +1,7 @@
 const RoundStatistic = ({ data, roundCount }) => {
   return (
     <section>
-      <h2>Round statistic</h2>
+      <h2>Round {roundCount} statistic</h2>
 
       {data.map(({ roundNumber, coinTossNumber, playerWinsCount }) => {
         const casinoWinsCount = coinTossNumber - playerWinsCount;
