@@ -7,11 +7,10 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Next test</title>
+        <title>Head and Tails | Home</title>
         <meta name="description" content="Home page" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HomePage/>
+      <HomePage />
     </>
   );
 };

@@ -6,9 +6,8 @@ const Game = () => {
   return (
     <>
       <Head>
-        <title>Game</title>
+        <title>Head and Tails | Game</title>
         <meta name="description" content="Game page" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <GamePage />
     </>

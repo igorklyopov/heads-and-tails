@@ -1,12 +1,16 @@
+
+
 import Layout from '../components/Layout/Layout';
 
 import '../styles/globals.scss';
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 };
 
