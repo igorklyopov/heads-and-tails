@@ -5,6 +5,8 @@ import styles from './Coin.module.scss';
 
 const Coin = ({
   coinFlipped,
+  coinTossResult,
+  coinSideSelection,
   setShowCoinSideChoiceButtons,
   setShowCoinTossChoiceButtons,
 }) => {
@@ -13,17 +15,20 @@ const Coin = ({
     transform: `perspective(600px) rotateX(${coinFlipped ? 1800 : 0}deg)`,
     config: { mass: 50, tension: 50, friction: 80 },
     onStart: () => setShowCoinTossChoiceButtons(false),
+
     onRest: () => setShowCoinSideChoiceButtons(true),
   });
+
+  const coinSide = coinSideSelection ? coinTossResult : 'unknown';
 
   return (
     <div className={styles.container}>
       <a.div
-        className={`${styles.c} ${styles.back}`}
+        className={`${styles.coin} ${styles[coinSide]}`}
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
       />
       <a.div
-        className={`${styles.c} ${styles.front}`}
+        className={`${styles.coin} ${styles[coinSide]}`}
         style={{
           opacity,
           transform,

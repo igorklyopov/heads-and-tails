@@ -1,8 +1,24 @@
-.navList{
-display: flex;
-justify-content: space-around;
+.header {
+  background-color: var(--secondary-bg-dark);
+  font-family: var(--secondary-font);
 }
 
-.active{
-  background-color:  yellowgreen;
+.navList {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-bottom: 0;
+}
+
+.link {
+  display: block;
+
+  padding: 10px;
+
+  text-transform: uppercase;
+}
+
+.active {
+  color: yellow;
 }

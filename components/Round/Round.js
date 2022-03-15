@@ -1,5 +1,6 @@
 import { useEffect, useState, useReducer, useCallback } from 'react';
 
+import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
@@ -29,6 +30,7 @@ const Round = ({ setIsGameStarted }) => {
     setPlayerWinsCount(0);
     setCoinSideSelection(null);
     setShowCoinTossChoiceButtons(true);
+    setShowCoinSideChoiceButtons(false);
   };
 
   const getCoinSpin = () => setCoinFlipped((state) => !state);
@@ -38,6 +40,7 @@ const Round = ({ setIsGameStarted }) => {
     setCoinTossCount((coinTossCount += 1));
     if (coinSideSelection) setCoinSideSelection(null);
     setCoinTossResult(coinToss());
+    
   };
 
   const finishRound = () => {
@@ -74,8 +77,10 @@ const Round = ({ setIsGameStarted }) => {
     setShowCoinSideChoiceButtons(false);
   };
 
+  console.log('coinSideSelection', coinSideSelection);
+
   return (
-    <>
+    <Container>
       {showRoundStatistic && (
         <RoundStatistic data={roundsStatistic} roundCount={roundCount} />
       )}
@@ -84,6 +89,8 @@ const Round = ({ setIsGameStarted }) => {
           <>
             <Coin
               coinFlipped={coinFlipped}
+              coinTossResult={coinTossResult}
+              coinSideSelection={coinSideSelection}
               setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
               setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
             />
@@ -151,7 +158,7 @@ const Round = ({ setIsGameStarted }) => {
           </>
         )}
       </section>
-    </>
+    </Container>
   );
 };
 
