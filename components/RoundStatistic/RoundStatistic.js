@@ -1,7 +1,9 @@
+import styles from './RoundStatistic.module.scss';
+
 const RoundStatistic = ({ data, roundCount }) => {
   return (
-    <section>
-      <h2>Round {roundCount} statistic</h2>
+    <section className={styles.statistic}>
+      <h2 className={styles.title}>Round {roundCount} statistic</h2>
 
       {data.map(({ roundNumber, coinTossNumber, playerWinsCount }) => {
         const casinoWinsCount = coinTossNumber - playerWinsCount;
@@ -21,10 +23,20 @@ const RoundStatistic = ({ data, roundCount }) => {
         if (roundNumber === roundCount)
           return (
             <div key={roundNumber}>
-              <p>Coin toss number: {coinTossNumber}</p>
-              <p>You won {playerWinsCount} set(s)</p>
-              <p>Casino won {casinoWinsCount} set(s)</p>
-              <p>{winnerMessage}</p>
+              <p>
+                Coin toss number :{' '}
+                <span className={styles.count}>{coinTossNumber} </span>
+              </p>
+              <p>
+                You won <span className={styles.count}>{playerWinsCount} </span>
+                set(s)
+              </p>
+              <p>
+                Casino won{' '}
+                <span className={styles.count}>{casinoWinsCount} </span>
+                set(s)
+              </p>
+              <p className={styles.result}>{winnerMessage}</p>
             </div>
           );
       })}
