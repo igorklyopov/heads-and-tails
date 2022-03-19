@@ -5,6 +5,8 @@ import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
 import { COIN_SIDES, MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
+import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
+
 import styles from './Round.module.scss';
 
 const Round = ({ setIsGameStarted }) => {
@@ -40,7 +42,6 @@ const Round = ({ setIsGameStarted }) => {
     setCoinTossCount((coinTossCount += 1));
     if (coinSideSelection) setCoinSideSelection(null);
     setCoinTossResult(coinToss());
-    
   };
 
   const finishRound = () => {
@@ -84,7 +85,7 @@ const Round = ({ setIsGameStarted }) => {
       {showRoundStatistic && (
         <RoundStatistic data={roundsStatistic} roundCount={roundCount} />
       )}
-      <section>
+      <section className={styles.round}>
         {isRoundStarted ? (
           <>
             <Coin
@@ -94,14 +95,20 @@ const Round = ({ setIsGameStarted }) => {
               setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
               setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
             />
-            <h2>Round {roundCount}</h2>
+            <h2 className={styles.title}>Round {roundCount}</h2>
 
             {coinSideSelection && (
-              <p>{isPlayerGuessed ? 'You won' : 'Casino won'}</p>
+              <p className={styles.message}>
+                {isPlayerGuessed ? (
+                  <span className={styles.success}>You won !</span>
+                ) : (
+                  <span className={styles.error}>Casino won !</span>
+                )}
+              </p>
             )}
             {showCoinTossChoiceButtons && (
               <>
-                <p>Are you ready to rumble?</p>
+                <p className={styles.question}>Are you ready to rumble ?</p>
                 <button type="button" onClick={makeCoinToss}>
                   Yes
                 </button>
@@ -111,44 +118,15 @@ const Round = ({ setIsGameStarted }) => {
               </>
             )}
             {showCoinSideChoiceButtons && (
-              <form>
-                <label
-                  className={
-                    coinSideSelection === COIN_SIDES.heads ? styles.active : ''
-                  }
-                >
-                  <span>Heads</span>
-                  <input
-                    type="radio"
-                    name="coin-side"
-                    value={COIN_SIDES.heads}
-                    onChange={selectCoinSide}
-                    checked={coinSideSelection === COIN_SIDES.heads}
-                    disabled={coinSideSelection}
-                  />
-                </label>
-                <span>or</span>
-                <label
-                  className={
-                    coinSideSelection === COIN_SIDES.tails ? styles.active : ''
-                  }
-                >
-                  <span>Tails</span>
-                  <input
-                    type="radio"
-                    name="coin-side"
-                    value={COIN_SIDES.tails}
-                    onChange={selectCoinSide}
-                    checked={coinSideSelection === COIN_SIDES.tails}
-                    disabled={coinSideSelection}
-                  />
-                </label>
-              </form>
+              <CoinSideSelector
+                selectCoinSide={selectCoinSide}
+                coinSideSelection={coinSideSelection}
+              />
             )}
           </>
         ) : (
           <>
-            <p>Another round?</p>
+            <p className={styles.question}>Another round ?</p>
             <button type="button" onClick={startRound}>
               Yes
             </button>

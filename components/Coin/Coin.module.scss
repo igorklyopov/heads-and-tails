@@ -18,16 +18,17 @@
 
   border-radius: 50%;
   will-change: transform, opacity;
+
+   
 }
 
 .tails,
 .heads,
 .unknown {
+  background-color: var(--primary-bg-dark-shade); 
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-
-  
 }
 
 .tails {
@@ -39,29 +40,25 @@
 .heads {
   background-image: url(../../public/assets/images/coin-head.svg);
 
-  animation: showCoinSide  0.3s ease-out;
-  
+  animation: showCoinSide 0.3s ease-out;
 }
 
-.unknown{
+.unknown {
   background-image: url(../../public/assets/images/coin-unknown.svg);
 }
 
 @keyframes showCoinSide {
   0% {
-    // opacity: 0;
-   transform: scale(0.9); 
+    opacity: 0;
+    transform: scale(0.9);
   }
 
-  
-
-  95%{
-    // opacity: 0.9;
+  95% {
     transform: scale(1.1);
   }
 
   100% {
-    // opacity: 1;
+    opacity: 1;
     transform: scale(1);
   }
 }
