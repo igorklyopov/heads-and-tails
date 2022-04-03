@@ -5,18 +5,20 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <Container>
-        <p>Footer</p>
-        {'© '}
+        <p className={styles.copyright}>
+          {'© '}
         <a
           color="inherit"
           href="https://github.com/igorklyopov"
           target="_blank"
           rel="noopener noreferrer"
-          className="copyrightLink"
+          className={styles.copyrightLink}
         >
           by Igor Klyopov
         </a>{' '}
         {new Date().getFullYear()}
+        </p>
+        
       </Container>
     </footer>
   );
