@@ -1,13 +1,14 @@
-import { useState,  } from 'react';
+import { useState } from 'react';
 
 import styles from './GamePage.module.scss';
 
 import Round from '../Round/Round';
 import Container from '../Container/Container';
+import Button from '../Button/Button';
 
 const GamePage = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
-  
+
   const startGame = () => {
     setIsGameStarted(true);
   };
@@ -18,9 +19,9 @@ const GamePage = () => {
     <Container>
       <h1>Game</h1>
       <p>Let{"'"}s play?</p>
-      <button type="button" onClick={startGame}>
+      <Button type="button" onClick={startGame}>
         Start
-      </button>
+      </Button>
     </Container>
   );
 };

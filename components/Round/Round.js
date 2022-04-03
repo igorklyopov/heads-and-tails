@@ -4,8 +4,10 @@ import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
-import { COIN_SIDES, MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
+import { MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
 import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
+import ButtonWrap from '../ButtonsWrap/ButtonsWrap';
+import Button from '../Button/Button';
 
 import styles from './Round.module.scss';
 
@@ -109,12 +111,14 @@ const Round = ({ setIsGameStarted }) => {
             {showCoinTossChoiceButtons && (
               <>
                 <p className={styles.question}>Are you ready to rumble ?</p>
-                <button type="button" onClick={makeCoinToss}>
-                  Yes
-                </button>
-                <button type="button" onClick={finishRound}>
-                  No
-                </button>
+                <ButtonWrap>
+                  <Button type="button" onClick={makeCoinToss}>
+                    Yes
+                  </Button>
+                  <Button type="button" onClick={finishRound}>
+                    No
+                  </Button>
+                </ButtonWrap>
               </>
             )}
             {showCoinSideChoiceButtons && (
@@ -127,12 +131,14 @@ const Round = ({ setIsGameStarted }) => {
         ) : (
           <>
             <p className={styles.question}>Another round ?</p>
-            <button type="button" onClick={startRound}>
-              Yes
-            </button>
-            <button type="button" onClick={finishRound}>
-              No
-            </button>
+            <ButtonWrap>
+              <Button type="button" onClick={startRound}>
+                Yes
+              </Button>
+              <Button type="button" onClick={finishRound}>
+                No
+              </Button>
+            </ButtonWrap>
           </>
         )}
       </section>
