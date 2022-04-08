@@ -16,13 +16,15 @@ const GamePage = () => {
   return isGameStarted ? (
     <Round setIsGameStarted={setIsGameStarted} />
   ) : (
-    <Container>
-      <h1>Game</h1>
-      <p>Let{"'"}s play?</p>
-      <Button type="button" onClick={startGame}>
-        Start
-      </Button>
-    </Container>
+    <section className={styles.game}>
+      <Container>
+        <h1 className={styles.title}>Heads and tails game</h1>
+        <p className={styles.question}>Let{"'"}s play?</p>
+        <Button type="button" onClick={startGame}>
+          Start
+        </Button>
+      </Container>
+    </section>
   );
 };
 

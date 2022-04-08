@@ -1,2 +1,17 @@
+.game {
+  margin-top: 80px;
 
+  font-family: var(--secondary-font);
 
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.question {
+  margin-bottom: 20px;
+  font-size: 34px;
+}

@@ -80,8 +80,6 @@ const Round = ({ setIsGameStarted }) => {
     setShowCoinSideChoiceButtons(false);
   };
 
-  console.log('coinSideSelection', coinSideSelection);
-
   return (
     <Container>
       {showRoundStatistic && (
