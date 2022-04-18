@@ -5,7 +5,7 @@ const RoundStatistic = ({ data, roundCount }) => {
     <section className={styles.statistic}>
       <h2 className={styles.title}>Round {roundCount} statistic</h2>
 
-      {data.map(({ roundNumber, coinTossNumber, playerWinsCount }) => {
+      {data.map(({ roundNumber, coinTossNumber, playerWinsCount }, index) => {
         const casinoWinsCount = coinTossNumber - playerWinsCount;
         const winRate = playerWinsCount - casinoWinsCount;
         const getWinnerMessage = () => {
@@ -20,7 +20,7 @@ const RoundStatistic = ({ data, roundCount }) => {
 
         const winnerMessage = getWinnerMessage();
 
-        if (roundNumber === roundCount)
+        if (data.length > 0 && index === data.length - 1)
           return (
             <div key={roundNumber}>
               <p>

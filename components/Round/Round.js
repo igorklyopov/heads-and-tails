@@ -5,6 +5,10 @@ import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
 import { MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
+import {
+  saveInLocalStorage,
+  getFromLocalStorage,
+} from '../../utils/localStorageFunc';
 import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
 import ButtonWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';
@@ -26,6 +30,37 @@ const Round = ({ setIsGameStarted }) => {
   const [roundsStatistic, setRoundsStatistic] = useState([]);
   const [showRoundStatistic, setShowRoundStatistic] = useState(false);
 
+  useEffect(() => {
+    const roundsStatisticData = getFromLocalStorage('rounds-statistic');
+    const coinTossStatisticData = getFromLocalStorage('coin-toss-statistic');
+
+    if (roundsStatisticData?.length > 0) {
+      const currentRoundCount =
+        roundsStatisticData[roundsStatisticData.length - 1].roundNumber;
+
+      setRoundCount(currentRoundCount);
+      setRoundsStatistic(roundsStatisticData);
+      setIsRoundStarted(false);
+      setShowRoundStatistic(true);
+    }
+
+    if (Object.keys(coinTossStatisticData || {}).length > 0) {
+      const {
+        coinTossNumber,
+        coinTossResult,
+        coinSideSelection,
+        playerWinsCount,
+      } = coinTossStatisticData;
+
+      setCoinTossCount(coinTossNumber);
+      setCoinTossResult(coinTossResult);
+      setCoinSideSelection(coinSideSelection);
+      setPlayerWinsCount(playerWinsCount);
+      setShowCoinTossChoiceButtons(true);
+      setShowCoinSideChoiceButtons(false);
+    }
+  }, []);
+
   const startRound = () => {
     setShowRoundStatistic(false);
     setIsRoundStarted(true);
@@ -41,7 +76,7 @@ const Round = ({ setIsGameStarted }) => {
 
   const makeCoinToss = () => {
     getCoinSpin();
-    setCoinTossCount((coinTossCount += 1));
+
     if (coinSideSelection) setCoinSideSelection(null);
     setCoinTossResult(coinToss());
   };
@@ -61,6 +96,9 @@ const Round = ({ setIsGameStarted }) => {
     ]);
     setIsRoundStarted(false);
     setShowRoundStatistic(true);
+
+    saveInLocalStorage('coin-toss-statistic', {});
+    saveInLocalStorage('rounds-statistic', []);
   };
 
   useEffect(() => {
@@ -69,6 +107,10 @@ const Round = ({ setIsGameStarted }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coinTossCount]);
 
+  useEffect(() => {
+    saveInLocalStorage('rounds-statistic', roundsStatistic);
+  }, [roundsStatistic]);
+
   const isPlayerGuessed = coinSideSelection === coinTossResult;
 
   const selectCoinSide = (e) => {
@@ -76,8 +118,19 @@ const Round = ({ setIsGameStarted }) => {
     if (e.target.value === coinTossResult)
       setPlayerWinsCount((playerWinsCount += 1));
 
+    setCoinTossCount((coinTossCount += 1));
     setShowCoinTossChoiceButtons(true);
     setShowCoinSideChoiceButtons(false);
+
+    const coinTossStatistic = {
+      roundNumber: roundCount,
+      coinTossNumber: coinTossCount,
+      coinTossResult,
+      coinSideSelection: e.target.value,
+      playerWinsCount,
+    };
+
+    saveInLocalStorage('coin-toss-statistic', coinTossStatistic);
   };
 
   return (
