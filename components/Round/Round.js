@@ -49,13 +49,11 @@ const Round = ({ setIsGameStarted }) => {
         coinTossNumber,
         coinTossResult,
         coinSideSelection,
-        playerWinsCount,
       } = coinTossStatisticData;
 
       setCoinTossCount(coinTossNumber);
       setCoinTossResult(coinTossResult);
       setCoinSideSelection(coinSideSelection);
-      setPlayerWinsCount(playerWinsCount);
       setShowCoinTossChoiceButtons(true);
       setShowCoinSideChoiceButtons(false);
     }
@@ -127,7 +125,6 @@ const Round = ({ setIsGameStarted }) => {
       coinTossNumber: coinTossCount,
       coinTossResult,
       coinSideSelection: e.target.value,
-      playerWinsCount,
     };
 
     saveInLocalStorage('coin-toss-statistic', coinTossStatistic);
