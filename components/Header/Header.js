@@ -38,6 +38,19 @@ const Header = () => {
                 </a>
               </Link>
             </li>
+            <li>
+              <Link href="/statistic">
+                <a
+                  className={
+                    pathname === '/statistic'
+                      ? `${styles.link} ${styles.active}`
+                      : styles.link
+                  }
+                >
+                  Statistic
+                </a>
+              </Link>
+            </li>
           </ul>
         </nav>
       </Container>

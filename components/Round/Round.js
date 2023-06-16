@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer, useCallback } from 'react';
+import { useEffect, useState} from 'react';
 
 import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
