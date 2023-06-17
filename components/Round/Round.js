@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
@@ -45,11 +45,8 @@ const Round = ({ setIsGameStarted }) => {
     }
 
     if (Object.keys(coinTossStatisticData || {}).length > 0) {
-      const {
-        coinTossNumber,
-        coinTossResult,
-        coinSideSelection,
-      } = coinTossStatisticData;
+      const { coinTossNumber, coinTossResult, coinSideSelection } =
+        coinTossStatisticData;
 
       setCoinTossCount(coinTossNumber);
       setCoinTossResult(coinTossResult);
@@ -62,7 +59,7 @@ const Round = ({ setIsGameStarted }) => {
   const startRound = () => {
     setShowRoundStatistic(false);
     setIsRoundStarted(true);
-    setRoundCount((roundCount += 1));
+    setRoundCount((roundCount) => (roundCount += 1));
     setCoinTossCount(0);
     setPlayerWinsCount(0);
     setCoinSideSelection(null);
@@ -114,9 +111,9 @@ const Round = ({ setIsGameStarted }) => {
   const selectCoinSide = (e) => {
     setCoinSideSelection(e.target.value);
     if (e.target.value === coinTossResult)
-      setPlayerWinsCount((playerWinsCount += 1));
+      setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
 
-    setCoinTossCount((coinTossCount += 1));
+    setCoinTossCount((coinTossCount) => (coinTossCount += 1));
     setShowCoinTossChoiceButtons(true);
     setShowCoinSideChoiceButtons(false);
 
