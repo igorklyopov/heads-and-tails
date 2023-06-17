@@ -17,9 +17,7 @@ const HomePage = () => {
           accusantium nemo aut magni voluptatum aliquam, iusto reprehenderit
           quam nulla maxime.
         </p>
-        <Link href="/game">
-          <a>Go to game</a>
-        </Link>
+        <Link href="/game">Go to game</Link>
       </section>
     </div>
   );

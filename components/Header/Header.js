@@ -13,34 +13,39 @@ const Header = () => {
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li>
-              <Link href="/">
-                <a
-                  className={
-                    pathname === '/'
-                      ? `${styles.link} ${styles.active}`
-                      : styles.link
-                  }
-                >
-                  Home
-                </a>
+              <Link
+                href="/"
+                className={
+                  pathname === '/'
+                    ? `${styles.link} ${styles.active}`
+                    : styles.link
+                }
+              >
+                Home
               </Link>
             </li>
             <li>
-              <Link href="/game">
-                <a
-                  className={
-                    pathname === '/game'
-                      ? `${styles.link} ${styles.active}`
-                      : styles.link
-                  }
-                >
-                  Game
-                </a>
+              <Link
+                href="/game"
+                className={
+                  pathname === '/game'
+                    ? `${styles.link} ${styles.active}`
+                    : styles.link
+                }
+              >
+                Game
               </Link>
             </li>
             <li>
-              <Link href="/statistic">
-                <a
+              <Link
+                href="/statistic"
+                className={
+                  pathname === '/statistic'
+                    ? `${styles.link} ${styles.active}`
+                    : styles.link
+                }
+              >
+                {/* <a
                   className={
                     pathname === '/statistic'
                       ? `${styles.link} ${styles.active}`
@@ -48,7 +53,8 @@ const Header = () => {
                   }
                 >
                   Statistic
-                </a>
+                </a> */}
+                Statistic
               </Link>
             </li>
           </ul>
