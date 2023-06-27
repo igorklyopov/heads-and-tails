@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSpring, a } from '@react-spring/web';
+import Coin3D from './Coin3D';
 
 import styles from './Coin.module.scss';
 
@@ -23,7 +24,8 @@ const Coin = ({
 
   return (
     <div className={styles.container}>
-      <a.div
+      <Coin3D />
+      {/* <a.div
         className={`${styles.coin} ${styles[coinSide]}`}
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
       />
@@ -34,7 +36,7 @@ const Coin = ({
           transform,
           rotateX: '1800deg',
         }}
-      />
+      /> */}
     </div>
   );
 };
