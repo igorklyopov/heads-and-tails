@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import { getFromLocalStorage } from '../../utils/localStorageFunc';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import ButtonsWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';
@@ -11,14 +10,6 @@ const buttonStyles = {
 };
 
 const GameStatistic = () => {
-  const roundsStatisticData = getFromLocalStorage('rounds-statistic');
-
-  // const roundsStatisticData = [];
-
-  // useEffect(() => { }, []);
-  console.log(roundsStatisticData);
-  console.log(localStorage);
-
   const [index, setIndex] = useState(0);
   const onPrevBtnClick = () => {
     setIndex((index -= 1));

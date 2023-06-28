@@ -1,6 +1,7 @@
 import styles from './RoundStatistic.module.scss';
 
 const RoundStatistic = ({ data, roundCount }) => {
+  data=[];
   return (
     <section className={styles.statistic}>
       <h2 className={styles.title}>Round {roundCount} statistic</h2>
