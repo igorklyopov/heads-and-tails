@@ -5,11 +5,7 @@ import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
 import { MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
-import {
-  saveStatistic,
-  getStatistic,
-  removeStatistic,
-} from '../../utils/indexedDBFunc';
+import { saveStatistic, removeStatistic } from '../../utils/indexedDBFunc';
 import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
 import ButtonWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';

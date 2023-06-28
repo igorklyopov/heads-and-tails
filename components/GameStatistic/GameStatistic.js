@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import { getStatistic } from '../../utils/indexedDBFunc';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import ButtonsWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';
@@ -11,19 +12,33 @@ const buttonStyles = {
 
 const GameStatistic = () => {
   const [index, setIndex] = useState(0);
+  const [gameStatisticData, setGameStatisticData] = useState([]);
+
+  useEffect(() => {
+    getStatistic(setGameStatisticData);
+  }, []);
+
   const onPrevBtnClick = () => {
-    setIndex((index -= 1));
+    if (index > 0) {
+      setIndex((index) => (index -= 1));
+    } else {
+      return;
+    }
   };
   const onNextBtnClick = () => {
-    setIndex((index += 1));
+    if (index < gameStatisticData.length - 1) {
+      setIndex((index) => (index += 1));
+    } else {
+      return;
+    }
   };
 
-  if (roundsStatisticData.length > 0)
+  if (gameStatisticData.length > 0)
     return (
       <>
         <RoundStatistic
-          data={roundsStatisticData}
-          roundCount={roundsStatisticData[index].roundNumber}
+          data={gameStatisticData[index]}
+          roundCount={gameStatisticData[index].roundNumber}
         />
         <ButtonsWrap>
           <Button style={buttonStyles} onClick={onPrevBtnClick}>

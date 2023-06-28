@@ -2,7 +2,6 @@ import styles from './RoundStatistic.module.scss';
 
 const RoundStatistic = ({ data, roundCount }) => {
   const { roundNumber, coinTossNumber, playerWinsCount } = data;
-
   const casinoWinsCount = coinTossNumber - playerWinsCount;
   const winRate = playerWinsCount - casinoWinsCount;
   const getWinnerMessage = () => {
@@ -14,8 +13,8 @@ const RoundStatistic = ({ data, roundCount }) => {
       return 'There is no winner in this round';
     }
   };
-
   const winnerMessage = getWinnerMessage();
+
   return (
     <section className={styles.statistic}>
       <h2 className={styles.title}>Round {roundCount} statistic</h2>

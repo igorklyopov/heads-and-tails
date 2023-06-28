@@ -38,20 +38,20 @@ function saveStatistic({ roundNumber, coinTossNumber, playerWinsCount }) {
   };
 }
 
-function getStatistic() {
+function getStatistic(func) {
   const openRequest = getStatisticDB();
 
   openRequest.onsuccess = function () {
     const db = openRequest.result;
-    const statisticData = db.transaction('statistic').objectStore('statistic');
+    const store = db.transaction('statistic').objectStore('statistic');
 
-    statisticData.getAll().onsuccess = function () {
+    store.getAll().onsuccess = function (event) {
       console.log('%cGet statistic success', 'color:#15eb15');
 
-      return openRequest.result;
+      func(event.target.result);
     };
 
-    statisticData.getAll().onerror = function () {
+    store.getAll().onerror = function () {
       console.error('Error, statistic not get', statisticData.getAll().error);
     };
   };
