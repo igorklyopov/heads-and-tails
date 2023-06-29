@@ -58,7 +58,6 @@ const Round = ({ setIsGameStarted }) => {
     };
 
     setRoundStatistic(newRoundStatistic);
-
     setIsRoundStarted(false);
     setShowRoundStatistic(true);
 
@@ -83,20 +82,11 @@ const Round = ({ setIsGameStarted }) => {
     setCoinTossCount((coinTossCount) => (coinTossCount += 1));
     setShowCoinTossChoiceButtons(true);
     setShowCoinSideChoiceButtons(false);
-
-    const coinTossStatistic = {
-      roundNumber: roundCount,
-      coinTossNumber: coinTossCount,
-      coinTossResult,
-      coinSideSelection: e.target.value,
-    };
   };
 
   return (
     <Container>
-      {showRoundStatistic && (
-        <RoundStatistic data={roundStatistic} roundCount={roundCount} />
-      )}
+      {showRoundStatistic && <RoundStatistic data={roundStatistic} />}
       <section className={styles.round}>
         {isRoundStarted ? (
           <>

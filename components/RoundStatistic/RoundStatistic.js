@@ -1,6 +1,6 @@
 import styles from './RoundStatistic.module.scss';
 
-const RoundStatistic = ({ data, roundCount }) => {
+const RoundStatistic = ({ data }) => {
   const { roundNumber, coinTossNumber, playerWinsCount } = data;
   const casinoWinsCount = coinTossNumber - playerWinsCount;
   const winRate = playerWinsCount - casinoWinsCount;
@@ -17,7 +17,7 @@ const RoundStatistic = ({ data, roundCount }) => {
 
   return (
     <section className={styles.statistic}>
-      <h2 className={styles.title}>Round {roundCount} statistic</h2>
+      <h2 className={styles.title}>Round {roundNumber} statistic</h2>
 
       <div key={roundNumber}>
         <p>
