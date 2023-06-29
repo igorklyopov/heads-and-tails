@@ -38,4 +38,8 @@ const RoundStatistic = ({ data }) => {
   );
 };
 
+RoundStatistic.defaultProps = {
+  data: {},
+};
+
 export default RoundStatistic;

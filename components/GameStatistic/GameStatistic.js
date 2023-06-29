@@ -41,10 +41,18 @@ const GameStatistic = () => {
           roundCount={gameStatisticData[index].roundNumber}
         />
         <ButtonsWrap>
-          <Button style={buttonStyles} onClick={onPrevBtnClick}>
+          <Button
+            style={buttonStyles}
+            onClick={onPrevBtnClick}
+            disabled={index === 0}
+          >
             {'<'}
           </Button>
-          <Button style={buttonStyles} onClick={onNextBtnClick}>
+          <Button
+            style={buttonStyles}
+            onClick={onNextBtnClick}
+            disabled={index === gameStatisticData.length - 1}
+          >
             {'>'}
           </Button>
         </ButtonsWrap>
