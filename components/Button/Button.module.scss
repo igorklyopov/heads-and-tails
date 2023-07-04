@@ -23,3 +23,9 @@
   color: var(--primary-light);
   background-color: var(--secondary-bg-dark);
 }
+
+.button:disabled {
+  color: var(--secondary-bg-dark);
+  background-color: var(--primary-light);
+  opacity: 0.3;
+}
