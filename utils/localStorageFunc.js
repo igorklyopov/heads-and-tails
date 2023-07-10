@@ -1,5 +1,5 @@
 const getFromLocalStorage = (value) => {
-  return localStorage.getItem(value);
+  return localStorage.getItem(JSON.parse(value));
 };
 
 const saveToLocalStorage = (key, value) => {
