@@ -1,33 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Container from '../Container/Container';
 import Button from '../Button/Button';
-import { SOUNDS, DEFAULT_SOUNDS_VOLUME } from '../../utils/gameConstants';
+import { SOUNDS } from '../../utils/gameConstants';
 import { useAudio } from '../../utils/useAudio';
-import { getFromLocalStorage } from '../../utils/localStorageFunc';
+import { useSoundManager } from '../../utils/useSoundManager';
 
 import styles from './GamePage.module.scss';
 
 const Start = ({ setIsGameStarted }) => {
   const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
     useAudio();
-  const [volume, setVolume] = useState(DEFAULT_SOUNDS_VOLUME);
-  const [soundOn, setSoundOn] = useState(false);
+
+  const { volume, soundOn } = useSoundManager();
 
   useEffect(() => {
-    const isSoundOn = getFromLocalStorage('sound') === 'on';
-    const savedAudioVolume = getFromLocalStorage('volume');
-
-    setSoundOn(isSoundOn);
-    setVolume(savedAudioVolume);
     setAudioPlayVolume(volume);
+  }, [setAudioPlayVolume, volume]);
 
+  useEffect(() => {
     if (soundOn) return stopAudioPlay;
-  }, [setAudioPlayVolume, soundOn, stopAudioPlay, volume]);
+  }, [soundOn, stopAudioPlay]);
 
   const startGame = () => {
     if (soundOn) {
-      playAudio(SOUNDS.btnClick);
+      playAudio(SOUNDS.coinToss);
       onPlayAudioEnd(() => {
         setIsGameStarted(true);
       });

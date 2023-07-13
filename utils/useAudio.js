@@ -9,6 +9,8 @@ export const useAudio = () => {
     audioRef.current.play();
   };
 
+  const pause = () => audioRef.current.pause();
+
   const stopPlay = () => {
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
@@ -21,6 +23,7 @@ export const useAudio = () => {
   return {
     setAudioPlayVolume: (volume) => setVolume(volume),
     playAudio: (src) => play(src),
+    pauseAudio: () => pause(),
     stopAudioPlay: () => stopPlay(),
     onPlayAudioEnd: (func) => (audioRef.current.onended = func),
   };
