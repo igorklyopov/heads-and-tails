@@ -11,7 +11,6 @@ import styles from './GamePage.module.scss';
 const Start = ({ setIsGameStarted }) => {
   const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
     useAudio();
-
   const { volume, soundOn } = useSoundManager();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const Start = ({ setIsGameStarted }) => {
 
   const startGame = () => {
     if (soundOn) {
-      playAudio(SOUNDS.coinToss);
+      playAudio(SOUNDS.btnClick);
       onPlayAudioEnd(() => {
         setIsGameStarted(true);
       });
