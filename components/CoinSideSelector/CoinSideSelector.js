@@ -1,12 +1,11 @@
+import { useEffect } from 'react';
 import { useSpring, a } from '@react-spring/web';
 
-import { COIN_SIDES } from '../../utils/gameConstants';
-import { SOUNDS } from '../../utils/gameConstants';
+import { COIN_SIDES, SOUNDS } from '../../utils/gameConstants';
 import { useAudio } from '../../utils/useAudio';
 import { useSoundManager } from '../../utils/useSoundManager';
 
 import styles from './CoinSideSelector.module.scss';
-import { useEffect } from 'react';
 
 const CoinSideSelector = ({ selectCoinSide, coinSideSelection }) => {
   const { playAudio, stopAudioPlay, setAudioPlayVolume } = useAudio();

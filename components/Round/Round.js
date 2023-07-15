@@ -148,6 +148,15 @@ const Round = ({ setIsGameStarted }) => {
     }
   };
 
+  useEffect(() => {
+    if (soundOn && showRoundStatistic) {
+      playAudio(SOUNDS.showStatistic)
+      onPlayAudioEnd(() => {
+        stopAudioPlay();
+      });
+    }
+  }, [onPlayAudioEnd, playAudio, showRoundStatistic, soundOn, stopAudioPlay]);
+
   return (
     <Container>
       {showRoundStatistic && <RoundStatistic data={roundStatistic} />}
