@@ -7,7 +7,7 @@ const Statistic = () => {
     <>
       <Head>
         <title>Head and Tails | Statistic</title>
-        <meta name="description" content="Game page" />
+        <meta name="description" content="Statistic page" />
       </Head>
       <GameStatistic />
     </>
