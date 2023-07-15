@@ -5,7 +5,7 @@ import Round from '../Round/Round';
 
 const GamePage = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
-  console.log('isGameStarted');
+
   return isGameStarted ? (
     <Round setIsGameStarted={setIsGameStarted} />
   ) : (

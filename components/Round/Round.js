@@ -9,6 +9,7 @@ import { saveStatistic, removeStatistic } from '../../utils/indexedDBFunc';
 import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
 import ButtonWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';
+import ResultOfSetMessage from '../ResultOfSetMessage/ResultOfSetMessage';
 import { useAudio } from '../../utils/useAudio';
 import { useSoundManager } from '../../utils/useSoundManager';
 
@@ -28,6 +29,7 @@ const Round = ({ setIsGameStarted }) => {
   const [playerWinsCount, setPlayerWinsCount] = useState(0);
   const [roundStatistic, setRoundStatistic] = useState({});
   const [showRoundStatistic, setShowRoundStatistic] = useState(false);
+  const [isPlayerGuessed, setIsPlayerGuessed] = useState(null);
 
   const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
     useAudio();
@@ -119,7 +121,9 @@ const Round = ({ setIsGameStarted }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coinTossCount]);
 
-  const isPlayerGuessed = coinSideSelection === coinTossResult;
+  useEffect(() => {
+    setIsPlayerGuessed(coinSideSelection === coinTossResult);
+  }, [coinSideSelection, coinTossResult]);
 
   const selectCoinSide = (e) => {
     const selectCoinSideActions = () => {
@@ -137,6 +141,8 @@ const Round = ({ setIsGameStarted }) => {
       onPlayAudioEnd(() => {
         selectCoinSideActions();
       });
+
+      selectCoinSideActions();
     } else {
       selectCoinSideActions();
     }
@@ -158,13 +164,7 @@ const Round = ({ setIsGameStarted }) => {
             <h2 className={styles.title}>Round {roundCount}</h2>
 
             {coinSideSelection && (
-              <p className={styles.message}>
-                {isPlayerGuessed ? (
-                  <span className={styles.success}>You won !</span>
-                ) : (
-                  <span className={styles.error}>Casino won !</span>
-                )}
-              </p>
+              <ResultOfSetMessage isPlayerGuessed={isPlayerGuessed} />
             )}
             {showCoinTossChoiceButtons && (
               <>

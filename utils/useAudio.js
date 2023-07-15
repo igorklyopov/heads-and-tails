@@ -6,7 +6,16 @@ export const useAudio = () => {
 
   const play = (src) => {
     audioRef.current.src = src;
-    audioRef.current.play();
+
+    /*****************************
+     * fix error: DOMException: The play() request was interrupted by a new load request. https://goo.gl/LdLk22
+     */
+    const playPromise = audioRef.current.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then((_) => {}).catch((error) => {});
+    }
+    /************************ */
   };
 
   const pause = () => audioRef.current.pause();
