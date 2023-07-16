@@ -15,6 +15,9 @@ const SettingsPage = () => {
   const [volume, setVolume] = useState(0);
 
   useEffect(() => {
+    const savedSoundValue = getFromLocalStorage('sound');
+    setSoundOn(savedSoundValue === 'on');
+
     const savedVolume = getFromLocalStorage('volume');
     setVolume(savedVolume || DEFAULT_SOUNDS_VOLUME);
   }, []);
