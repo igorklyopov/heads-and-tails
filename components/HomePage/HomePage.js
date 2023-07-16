@@ -1,11 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
-  const { pathname } = useRouter();
-
   return (
     <div className={styles.container}>
       <section className={styles.main}>
