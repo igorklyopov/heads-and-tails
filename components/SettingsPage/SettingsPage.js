@@ -1,14 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 import { DEFAULT_SOUNDS_VOLUME } from '../../utils/gameConstants';
-import { saveToLocalStorage } from '../../utils/localStorageFunc';
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from '../../utils/localStorageFunc';
+import Container from '../Container/Container';
 
 import styles from './SettingsPage.module.scss';
 
 const SettingsPage = () => {
   const [soundOn, setSoundOn] = useState(false);
-  const [volume, setVolume] = useState(DEFAULT_SOUNDS_VOLUME);
+  const [volume, setVolume] = useState(0);
+
+  useEffect(() => {
+    const savedVolume = getFromLocalStorage('volume');
+    setVolume(savedVolume || DEFAULT_SOUNDS_VOLUME);
+  }, []);
 
   const soundToggle = (e) => {
     setSoundOn(e.target.checked);
@@ -20,28 +29,28 @@ const SettingsPage = () => {
     saveToLocalStorage('volume', e.target.value);
   };
 
-  useEffect(() => {
-    console.log('render SettingsPage');
-  }, []); // for test
-
   return (
-    <div className={styles.container}>
-      <section className={styles.main}>
-        <h2>Settings</h2>
-        <ul>
-          <li>
-            <label>
-              <span>sound</span>
+    <Container>
+      <section className={styles.settings}>
+        <h2 className="visually_hidden">Settings</h2>
+        <ul className="list">
+          <li className={styles.settings_item}>
+            <label className={styles.input_wrap}>
+              <span className={styles.label_text}>sound</span>
               <input
                 type="checkbox"
                 name="sound-toggle"
                 onChange={soundToggle}
+                className="visually_hidden"
               />
+              <span className={styles.custom_checkbox}>
+                {soundOn ? 'on' : 'off'}
+              </span>
             </label>
           </li>
           <li>
-            <label>
-              <span>volume</span>
+            <label className={styles.input_wrap}>
+              <span className={styles.label_text}>volume</span>
               <input
                 type="range"
                 name="sound-volume"
@@ -50,13 +59,16 @@ const SettingsPage = () => {
                 step={0.1}
                 value={volume}
                 onChange={onVolumeChange}
+                className={styles.volume_range}
               />
             </label>
           </li>
         </ul>
-        <Link href="/game">Go to game</Link>
+        <Link href="/game" className="basic_link">
+          Go to game
+        </Link>
       </section>
-    </div>
+    </Container>
   );
 };
 

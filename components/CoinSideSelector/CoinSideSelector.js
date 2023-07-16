@@ -36,7 +36,7 @@ const CoinSideSelector = ({ selectCoinSide, coinSideSelection }) => {
           onChange={selectCoinSide}
           checked={coinSideSelection === COIN_SIDES.heads}
           disabled={coinSideSelection}
-          className="visuallyHidden"
+          className="visually_hidden"
         />
       </label>
       <span className={styles.separator}>or </span>
@@ -49,7 +49,7 @@ const CoinSideSelector = ({ selectCoinSide, coinSideSelection }) => {
           onChange={selectCoinSide}
           checked={coinSideSelection === COIN_SIDES.tails}
           disabled={coinSideSelection}
-          className="visuallyHidden"
+          className="visually_hidden"
         />
       </label>
     </a.form>
