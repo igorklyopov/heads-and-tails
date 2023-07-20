@@ -13,8 +13,8 @@ export const useSoundManager = () => {
     const isSoundOn = getFromLocalStorage('sound') === 'on';
     const savedAudioVolume = getFromLocalStorage('volume');
 
-    setSoundOn(isSoundOn);
-    setVolume(savedAudioVolume);
+    if (isSoundOn) setSoundOn(isSoundOn);
+    if (savedAudioVolume) setVolume(savedAudioVolume);
   }, [setAudioPlayVolume, volume]);
 
   return { volume, soundOn };
