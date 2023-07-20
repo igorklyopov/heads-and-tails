@@ -150,7 +150,7 @@ const Round = ({ setIsGameStarted }) => {
 
   useEffect(() => {
     if (soundOn && showRoundStatistic) {
-      playAudio(SOUNDS.showStatistic)
+      playAudio(SOUNDS.showStatistic);
       onPlayAudioEnd(() => {
         stopAudioPlay();
       });
