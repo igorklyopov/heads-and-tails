@@ -4,8 +4,8 @@ import Container from '../components/Container/Container';
 
 const notFoundTitleStyles = {
   margin: '30% auto',
-  'font-size': '32px',
-  'text-align': 'center',
+  fontSize: '32px',
+  textAlign: 'center',
 };
 
 const PageNotFound = () => {
