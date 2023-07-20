@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import GameStatistic from '../components/GameStatistic/GameStatistic';
+import GameStatisticPage from '../components/GameStatisticPage/GameStatisticPage';
 
 const Statistic = () => {
   return (
@@ -9,7 +9,7 @@ const Statistic = () => {
         <title>Head and Tails | Statistic</title>
         <meta name="description" content="Statistic page" />
       </Head>
-      <GameStatistic />
+      <GameStatisticPage />
     </>
   );
 };

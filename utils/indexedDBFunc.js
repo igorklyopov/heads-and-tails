@@ -21,13 +21,13 @@ function saveStatistic({ roundNumber, coinTossNumber, playerWinsCount }) {
   openRequest.onsuccess = function () {
     const db = openRequest.result;
     const transaction = db.transaction('statistic', 'readwrite');
-    const gameStatistic = transaction.objectStore('statistic');
+    const GameStatisticPage = transaction.objectStore('statistic');
     const roundStatistic = {
       roundNumber,
       coinTossNumber,
       playerWinsCount,
     };
-    const request = gameStatistic.put(roundStatistic);
+    const request = GameStatisticPage.put(roundStatistic);
 
     request.onsuccess = function () {
       console.log('%cStatistic save', 'color:#15eb15');

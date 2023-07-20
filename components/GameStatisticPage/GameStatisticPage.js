@@ -13,12 +13,12 @@ const buttonStyles = {
   fontSize: '30px',
 };
 
-const GameStatistic = () => {
+const GameStatisticPage = () => {
   const [index, setIndex] = useState(0);
-  const [gameStatisticData, setGameStatisticData] = useState([]);
+  const [GameStatisticPageData, setGameStatisticPageData] = useState([]);
 
   useEffect(() => {
-    getStatistic(setGameStatisticData);
+    getStatistic(setGameStatisticPageData);
   }, []);
 
   const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
@@ -53,7 +53,7 @@ const GameStatistic = () => {
   };
   const onNextBtnClick = () => {
     const onNextBtnClickActions = () => {
-      if (index < gameStatisticData.length - 1) {
+      if (index < GameStatisticPageData.length - 1) {
       setIndex((index) => (index += 1));
     } else {
       return;
@@ -70,12 +70,12 @@ const GameStatistic = () => {
     }
   };
 
-  if (gameStatisticData.length > 0)
+  if (GameStatisticPageData.length > 0)
     return (
       <>
         <RoundStatistic
-          data={gameStatisticData[index]}
-          roundCount={gameStatisticData[index].roundNumber}
+          data={GameStatisticPageData[index]}
+          roundCount={GameStatisticPageData[index].roundNumber}
         />
         <ButtonsWrap>
           <Button
@@ -88,7 +88,7 @@ const GameStatistic = () => {
           <Button
             style={buttonStyles}
             onClick={onNextBtnClick}
-            disabled={index === gameStatisticData.length - 1}
+            disabled={index === GameStatisticPageData.length - 1}
           >
             {'>'}
           </Button>
@@ -97,4 +97,4 @@ const GameStatistic = () => {
     );
 };
 
-export default GameStatistic;
+export default GameStatisticPage;
