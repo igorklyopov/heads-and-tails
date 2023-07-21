@@ -87,7 +87,6 @@ const Round = ({ setIsGameStarted }) => {
   };
 
   const finishRound = () => {
-    console.log('finishRound');
     const finishRoundActions = () => {
       if (coinTossCount === 0 || showRoundStatistic) setIsGameStarted(false);
 
@@ -114,11 +113,6 @@ const Round = ({ setIsGameStarted }) => {
   };
 
   useEffect(() => {
-    console.log(
-      'coinTossCount === MAX_COIN_TOSS_COUNT',
-      coinTossCount === MAX_COIN_TOSS_COUNT
-    );
-    console.log('coinTossCount ', coinTossCount);
     if (coinTossCount === MAX_COIN_TOSS_COUNT) finishRound();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coinTossCount]);
