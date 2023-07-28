@@ -6,6 +6,7 @@ import { getFromLocalStorage } from '../../utils/localStorageFunc';
 import Round from '../Round/Round';
 import Container from '../Container/Container';
 import Button from '../Button/Button';
+import Coin3D from '../Coin/Coin3D';
 
 const GamePage = () => {
   const [isGameStarted, setIsGameStarted] = useState(false);
