@@ -1,11 +1,10 @@
 import { Suspense } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
-import { degToRad } from 'three/src/math/MathUtils';
-import * as THREE from 'three';
-import { CameraControls, useTexture, Environment } from '@react-three/drei';
+// import { degToRad } from 'three/src/math/MathUtils';
+// import * as THREE from 'three';
+import { CameraControls } from '@react-three/drei';
 
 import CoinModel from './CoinModel';
-
 
 const Coin3D = () => {
   const cameraParams = {
@@ -19,18 +18,8 @@ const Coin3D = () => {
 
   const colors = {
     ambientLight: '#ffffff',
-    primaryBgDarkShade: '#4d5561', // #55616b
+    primaryBgDarkShade: '#4d5561',
     primaryBgDark: '#434b57',
-  };
-  const coinGeometryParams = {
-    radiusTop: 40,
-    radiusBottom: 40,
-    height: 4,
-    radialSegments: 32,
-    // heightSegments: 1,
-    // openEnded: false,
-    // thetaStart: 0,
-    // thetaLength: 2 * Math.PI,
   };
 
   return (
@@ -48,10 +37,24 @@ const Coin3D = () => {
       color={colors.primaryBgDark}
     >
       <ambientLight intensity={2} />
-      <directionalLight
+      <spotLight
         color={colors.ambientLight}
-        position={[-1, 2, 30]}
-        intensity={0.3}
+        position={[0, 0, 800]}
+        angle={1}
+        intensity={0.9}
+        penumbra={1}
+      />
+      <spotLight
+        color={colors.ambientLight}
+        position={[800, 0, 200]}
+        angle={1}
+        intensity={0.7}
+      />
+      <spotLight
+        color={colors.ambientLight}
+        position={[-800, 0, 200]}
+        angle={1}
+        intensity={0.7}
       />
 
       <CoinModel />
