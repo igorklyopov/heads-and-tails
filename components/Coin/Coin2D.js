@@ -14,8 +14,8 @@ const Coin2D = ({
     opacity: coinFlipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${coinFlipped ? 1800 : 0}deg)`,
     config: { mass: 50, tension: 50, friction: 80 },
-    onStart: () => setShowCoinTossChoiceButtons(false),
 
+    onStart: () => setShowCoinTossChoiceButtons(false),
     onRest: () => setShowCoinSideChoiceButtons(true),
   });
 

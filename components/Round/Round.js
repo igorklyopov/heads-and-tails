@@ -67,10 +67,11 @@ const Round = ({ setIsGameStarted }) => {
     setShowCoinSideChoiceButtons(false);
   };
 
-  const getCoinSpin = () => setCoinFlipped((state) => !state);
+  // const getCoinSpin = () => setCoinFlipped((state) => !state);
 
   const makeCoinToss = () => {
-    getCoinSpin();
+    // getCoinSpin();
+    setCoinFlipped(true);
 
     if (coinSideSelection) setCoinSideSelection(null);
     setCoinTossResult(coinToss());
@@ -113,6 +114,7 @@ const Round = ({ setIsGameStarted }) => {
     if (e.target.value === coinTossResult)
       setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
 
+    setCoinFlipped(false);//
     setCoinTossCount((coinTossCount) => (coinTossCount += 1));
     setShowCoinTossChoiceButtons(true);
     setShowCoinSideChoiceButtons(false);
@@ -139,6 +141,7 @@ const Round = ({ setIsGameStarted }) => {
               coinFlipped={coinFlipped}
               coinTossResult={coinTossResult}
               coinSideSelection={coinSideSelection}
+              setCoinFlipped={setCoinFlipped}
               setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
               setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
             />

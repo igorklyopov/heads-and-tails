@@ -6,7 +6,14 @@ import { CameraControls } from '@react-three/drei';
 
 import CoinModel from './CoinModel';
 
-const Coin3D = () => {
+const Coin3D = ({
+  coinFlipped,
+  coinTossResult,
+  coinSideSelection,
+  setCoinFlipped,
+  setShowCoinSideChoiceButtons,
+  setShowCoinTossChoiceButtons,
+}) => {
   const cameraParams = {
     fov: 45,
     near: 0.1,
@@ -57,7 +64,16 @@ const Coin3D = () => {
         intensity={0.7}
       />
 
-      <CoinModel />
+      <Suspense fallback={null}>
+        <CoinModel
+          coinFlipped={coinFlipped}
+          coinTossResult={coinTossResult}
+          coinSideSelection={coinSideSelection}
+          setCoinFlipped={setCoinFlipped}
+          setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
+          setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
+        />
+      </Suspense>
 
       <CameraControls />
     </Canvas>
