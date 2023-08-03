@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
@@ -66,9 +66,8 @@ const Round = ({ setIsGameStarted }) => {
   };
 
   const makeCoinToss = () => {
-
     const makeCoinTossActions = () => {
-     setCoinFlipped(true);
+      setCoinFlipped(true);
 
       if (coinSideSelection) setCoinSideSelection(null);
       if (roundCount === 1 && coinTossCount === 0) removeStatistic();
@@ -126,8 +125,8 @@ const Round = ({ setIsGameStarted }) => {
       if (e.target.value === coinTossResult)
         setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
 
+      setCoinFlipped(false);
       setCoinTossCount((coinTossCount) => (coinTossCount += 1));
-      setShowCoinTossChoiceButtons(true);
       setShowCoinSideChoiceButtons(false);
     };
 
