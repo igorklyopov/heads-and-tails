@@ -1,17 +1,15 @@
-const saveInLocalStorage = (key = '', value = null) => {
-  if (typeof key !== 'string' || !value)
-    return console.error(
-      'typeof key mast be a string and value mast be not null'
-    );
-
-  localStorage.setItem(key, JSON.stringify(value));
+const getFromLocalStorage = (value) => {
+  const savedValue = localStorage?.getItem(value);
+  return savedValue ?? JSON.parse(savedValue);
 };
 
-const getFromLocalStorage = (key) => {
-  if (!key || typeof key !== 'string')
-    return console.error('typeof key mast be a string');
+const saveToLocalStorage = (key, value) => {
+  if (typeof value != 'string') {
+    localStorage.setItem(key, JSON.stringify(value));
+    return;
+  }
 
-  if (localStorage) return JSON.parse(localStorage.getItem(key));
+  localStorage.setItem(key, value);
 };
 
-export { saveInLocalStorage, getFromLocalStorage };
+export { getFromLocalStorage, saveToLocalStorage };

@@ -45,16 +45,19 @@ const Header = () => {
                     : styles.link
                 }
               >
-                {/* <a
-                  className={
-                    pathname === '/statistic'
-                      ? `${styles.link} ${styles.active}`
-                      : styles.link
-                  }
-                >
-                  Statistic
-                </a> */}
                 Statistic
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/settings"
+                className={
+                  pathname === '/settings'
+                    ? `${styles.link} ${styles.active}`
+                    : styles.link
+                }
+              >
+                Settings
               </Link>
             </li>
           </ul>

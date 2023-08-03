@@ -1,34 +1,21 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Heads and tails game
 
-First, run the development server:
+In order to start the game - you need to go to the "Game"
+page. A round of five throws is played. A "coin toss" is done
+by answering the question: Are you ready to rumble? - yes. Then it
+prompts the user to choose heads or tails. The game shows the user the
+result of each throw - guessed or not. After the end of each round,
+the game shows the player the result: the number of throws in the
+round, the number of sets when the player won and when the casino won,
+who won the round. The game then offers to play another round or end
+the game.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+On the "Statistics" page, you can see the results of each
+round played. If the player starts the game again, the statistics of
+previous rounds are not saved and the game starts from the first
+round.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+On the "Settings" page, you can turn sounds on/off, as well as
+change the volume.

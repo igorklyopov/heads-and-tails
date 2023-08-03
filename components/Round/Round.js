@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Container from '../Container/Container';
 import Coin from '../Coin/Coin';
 import RoundStatistic from '../RoundStatistic/RoundStatistic';
 import { coinToss } from '../../utils/coinToss';
-import { MAX_COIN_TOSS_COUNT } from '../../utils/gameConstants';
-import {
-  saveInLocalStorage,
-  getFromLocalStorage,
-} from '../../utils/localStorageFunc';
+import { MAX_COIN_TOSS_COUNT, SOUNDS } from '../../utils/gameConstants';
+import { saveStatistic, removeStatistic } from '../../utils/indexedDBFunc';
 import CoinSideSelector from '../CoinSideSelector/CoinSideSelector';
 import ButtonWrap from '../ButtonsWrap/ButtonsWrap';
 import Button from '../Button/Button';
+import ResultOfSetMessage from '../ResultOfSetMessage/ResultOfSetMessage';
+import { useAudio } from '../../utils/useAudio';
+import { useSoundManager } from '../../utils/useSoundManager';
 
 import styles from './Round.module.scss';
 
@@ -27,112 +27,134 @@ const Round = ({ setIsGameStarted }) => {
   const [coinSideSelection, setCoinSideSelection] = useState(null);
   const [coinTossResult, setCoinTossResult] = useState(null);
   const [playerWinsCount, setPlayerWinsCount] = useState(0);
-  const [roundsStatistic, setRoundsStatistic] = useState([]);
+  const [roundStatistic, setRoundStatistic] = useState({});
   const [showRoundStatistic, setShowRoundStatistic] = useState(false);
+  const [isPlayerGuessed, setIsPlayerGuessed] = useState(null);
+
+  const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
+    useAudio();
+  const { volume, soundOn } = useSoundManager();
 
   useEffect(() => {
-    const roundsStatisticData = getFromLocalStorage('rounds-statistic');
-    const coinTossStatisticData = getFromLocalStorage('coin-toss-statistic');
+    setAudioPlayVolume(volume);
+  }, [setAudioPlayVolume, volume]);
 
-    if (roundsStatisticData?.length > 0) {
-      const currentRoundCount =
-        roundsStatisticData[roundsStatisticData.length - 1].roundNumber;
-
-      setRoundCount(currentRoundCount);
-      setRoundsStatistic(roundsStatisticData);
-      setIsRoundStarted(false);
-      setShowRoundStatistic(true);
-    }
-
-    if (Object.keys(coinTossStatisticData || {}).length > 0) {
-      const { coinTossNumber, coinTossResult, coinSideSelection } =
-        coinTossStatisticData;
-
-      setCoinTossCount(coinTossNumber);
-      setCoinTossResult(coinTossResult);
-      setCoinSideSelection(coinSideSelection);
-      setShowCoinTossChoiceButtons(true);
-      setShowCoinSideChoiceButtons(false);
-    }
-  }, []);
+  useEffect(() => {
+    if (soundOn) return stopAudioPlay;
+  }, [soundOn, stopAudioPlay]);
 
   const startRound = () => {
-    setShowRoundStatistic(false);
-    setIsRoundStarted(true);
-    setRoundCount((roundCount) => (roundCount += 1));
-    setCoinTossCount(0);
-    setPlayerWinsCount(0);
-    setCoinSideSelection(null);
-    setShowCoinTossChoiceButtons(true);
-    setShowCoinSideChoiceButtons(false);
+    const startRoundActions = () => {
+      setShowRoundStatistic(false);
+      setIsRoundStarted(true);
+      setRoundCount((roundCount) => (roundCount += 1));
+      setCoinTossCount(0);
+      setPlayerWinsCount(0);
+      setCoinSideSelection(null);
+      setShowCoinTossChoiceButtons(true);
+      setShowCoinSideChoiceButtons(false);
+    };
+
+    if (soundOn) {
+      playAudio(SOUNDS.btnClick);
+      onPlayAudioEnd(() => {
+        startRoundActions();
+      });
+    } else {
+      startRoundActions();
+    }
   };
 
-  // const getCoinSpin = () => setCoinFlipped((state) => !state);
-
   const makeCoinToss = () => {
-    // getCoinSpin();
-    setCoinFlipped(true);
 
-    if (coinSideSelection) setCoinSideSelection(null);
-    setCoinTossResult(coinToss());
+    const makeCoinTossActions = () => {
+     setCoinFlipped(true);
+
+      if (coinSideSelection) setCoinSideSelection(null);
+      if (roundCount === 1 && coinTossCount === 0) removeStatistic();
+      setCoinTossResult(coinToss());
+    };
+
+    if (soundOn) {
+      playAudio(SOUNDS.btnClick);
+      onPlayAudioEnd(() => {
+        makeCoinTossActions();
+      });
+    } else {
+      makeCoinTossActions();
+    }
   };
 
   const finishRound = () => {
-    if (coinTossCount === 0 || showRoundStatistic) setIsGameStarted(false);
+    const finishRoundActions = () => {
+      if (coinTossCount === 0 || showRoundStatistic) setIsGameStarted(false);
 
-    const newRoundStatistic = {
-      roundNumber: roundCount,
-      coinTossNumber: coinTossCount,
-      playerWinsCount,
+      const newRoundStatistic = {
+        roundNumber: roundCount,
+        coinTossNumber: coinTossCount,
+        playerWinsCount,
+      };
+
+      setRoundStatistic(newRoundStatistic);
+      setIsRoundStarted(false);
+      setShowRoundStatistic(true);
+
+      if (Object.keys(roundStatistic).length > 0) {
+        saveStatistic(roundStatistic);
+      }
     };
 
-    setRoundsStatistic((prevRoundStatistic) => [
-      ...prevRoundStatistic,
-      newRoundStatistic,
-    ]);
-    setIsRoundStarted(false);
-    setShowRoundStatistic(true);
-
-    saveInLocalStorage('coin-toss-statistic', {});
-    saveInLocalStorage('rounds-statistic', []);
+    if (soundOn) {
+      playAudio(SOUNDS.btnClick);
+      onPlayAudioEnd(() => finishRoundActions());
+    }
+    finishRoundActions();
   };
 
   useEffect(() => {
     if (coinTossCount === MAX_COIN_TOSS_COUNT) finishRound();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coinTossCount]);
 
   useEffect(() => {
-    saveInLocalStorage('rounds-statistic', roundsStatistic);
-  }, [roundsStatistic]);
-
-  const isPlayerGuessed = coinSideSelection === coinTossResult;
+    setIsPlayerGuessed(coinSideSelection === coinTossResult);
+  }, [coinSideSelection, coinTossResult]);
 
   const selectCoinSide = (e) => {
-    setCoinSideSelection(e.target.value);
-    if (e.target.value === coinTossResult)
-      setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
+    const selectCoinSideActions = () => {
+      setCoinSideSelection(e.target.value);
+      if (e.target.value === coinTossResult)
+        setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
 
-    setCoinFlipped(false);
-    setCoinTossCount((coinTossCount) => (coinTossCount += 1));
-    setShowCoinSideChoiceButtons(false);
-
-    const coinTossStatistic = {
-      roundNumber: roundCount,
-      coinTossNumber: coinTossCount,
-      coinTossResult,
-      coinSideSelection: e.target.value,
+      setCoinTossCount((coinTossCount) => (coinTossCount += 1));
+      setShowCoinTossChoiceButtons(true);
+      setShowCoinSideChoiceButtons(false);
     };
 
-    saveInLocalStorage('coin-toss-statistic', coinTossStatistic);
+    if (soundOn) {
+      playAudio(SOUNDS.btnClick);
+      onPlayAudioEnd(() => {
+        selectCoinSideActions();
+      });
+
+      selectCoinSideActions();
+    } else {
+      selectCoinSideActions();
+    }
   };
+
+  useEffect(() => {
+    if (soundOn && showRoundStatistic) {
+      playAudio(SOUNDS.showStatistic);
+      onPlayAudioEnd(() => {
+        stopAudioPlay();
+      });
+    }
+  }, [onPlayAudioEnd, playAudio, showRoundStatistic, soundOn, stopAudioPlay]);
 
   return (
     <Container>
-      {showRoundStatistic && (
-        <RoundStatistic data={roundsStatistic} roundCount={roundCount} />
-      )}
+      {showRoundStatistic && <RoundStatistic data={roundStatistic} />}
       <section className={styles.round}>
         {isRoundStarted ? (
           <>
@@ -147,13 +169,7 @@ const Round = ({ setIsGameStarted }) => {
             <h2 className={styles.title}>Round {roundCount}</h2>
 
             {coinSideSelection && (
-              <p className={styles.message}>
-                {isPlayerGuessed ? (
-                  <span className={styles.success}>You won !</span>
-                ) : (
-                  <span className={styles.error}>Casino won !</span>
-                )}
-              </p>
+              <ResultOfSetMessage isPlayerGuessed={isPlayerGuessed} />
             )}
             {showCoinTossChoiceButtons && (
               <>
