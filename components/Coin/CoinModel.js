@@ -12,7 +12,6 @@ const CoinModel = ({
   coinFlipped,
   coinTossResult,
   coinSideSelection,
-  setCoinFlipped,
   setShowCoinSideChoiceButtons,
   setShowCoinTossChoiceButtons,
 }) => {
@@ -61,12 +60,6 @@ const CoinModel = ({
 
     onStart: () => setShowCoinTossChoiceButtons(false),
     onRest: () => {
-      // setCoinFlipped(false);
-
-      setRotationY((prev) => {
-        return prev;
-      });
-
       coinSideSelection
         ? setShowCoinTossChoiceButtons(true)
         : setShowCoinSideChoiceButtons(true);

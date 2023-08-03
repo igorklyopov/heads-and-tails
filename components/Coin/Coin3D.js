@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
-import { Canvas, useLoader } from '@react-three/fiber';
-// import { degToRad } from 'three/src/math/MathUtils';
-// import * as THREE from 'three';
+import { Canvas} from '@react-three/fiber';
+
 import { CameraControls } from '@react-three/drei';
 
 import CoinModel from './CoinModel';
@@ -10,7 +9,6 @@ const Coin3D = ({
   coinFlipped,
   coinTossResult,
   coinSideSelection,
-  setCoinFlipped,
   setShowCoinSideChoiceButtons,
   setShowCoinTossChoiceButtons,
 }) => {
@@ -69,7 +67,6 @@ const Coin3D = ({
           coinFlipped={coinFlipped}
           coinTossResult={coinTossResult}
           coinSideSelection={coinSideSelection}
-          setCoinFlipped={setCoinFlipped}
           setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
           setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
         />

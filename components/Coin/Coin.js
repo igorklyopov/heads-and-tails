@@ -7,27 +7,25 @@ const Coin = ({
   coinFlipped,
   coinTossResult,
   coinSideSelection,
-  setCoinFlipped,
   setShowCoinSideChoiceButtons,
   setShowCoinTossChoiceButtons,
 }) => {
   return (
     <div className={styles.container}>
-      <Coin3D
-        coinFlipped={coinFlipped}
-        coinTossResult={coinTossResult}
-        coinSideSelection={coinSideSelection}
-        setCoinFlipped={setCoinFlipped}
-        setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
-        setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
-      />
-      {/* <Coin2D
+      {/* <Coin3D
         coinFlipped={coinFlipped}
         coinTossResult={coinTossResult}
         coinSideSelection={coinSideSelection}
         setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
         setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
       /> */}
+      <Coin2D
+        coinFlipped={coinFlipped}
+        coinTossResult={coinTossResult}
+        coinSideSelection={coinSideSelection}
+        setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
+        setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
+      />
     </div>
   );
 };

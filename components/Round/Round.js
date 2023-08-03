@@ -114,9 +114,8 @@ const Round = ({ setIsGameStarted }) => {
     if (e.target.value === coinTossResult)
       setPlayerWinsCount((playerWinsCount) => (playerWinsCount += 1));
 
-    setCoinFlipped(false);//
+    setCoinFlipped(false);
     setCoinTossCount((coinTossCount) => (coinTossCount += 1));
-    setShowCoinTossChoiceButtons(true);
     setShowCoinSideChoiceButtons(false);
 
     const coinTossStatistic = {

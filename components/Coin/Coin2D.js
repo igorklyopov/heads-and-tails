@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { useSpring, a } from '@react-spring/web';
 
 import styles from './Coin.module.scss';
@@ -16,10 +15,16 @@ const Coin2D = ({
     config: { mass: 50, tension: 50, friction: 80 },
 
     onStart: () => setShowCoinTossChoiceButtons(false),
-    onRest: () => setShowCoinSideChoiceButtons(true),
+
+    onRest: () => {
+      coinSideSelection
+        ? setShowCoinTossChoiceButtons(true)
+        : setShowCoinSideChoiceButtons(true);
+    },
   });
 
   const coinSide = coinSideSelection ? coinTossResult : 'unknown';
+
   return (
     <>
       <a.div
