@@ -1,4 +1,6 @@
-import { useSpring, a } from '@react-spring/web';
+import Coin2D from './Coin2D';
+import Coin3D from './Coin3D';
+
 
 import { SOUNDS } from '../../utils/gameConstants';
 import { useAudio } from '../../utils/useAudio';
@@ -39,17 +41,19 @@ const Coin = ({
 
   return (
     <div className={styles.container}>
-      <a.div
-        className={`${styles.coin} ${styles[coinSide]}`}
-        style={{ opacity: opacity.to((o) => 1 - o), transform }}
-      />
-      <a.div
-        className={`${styles.coin} ${styles[coinSide]}`}
-        style={{
-          opacity,
-          transform,
-          rotateX: '1800deg',
-        }}
+      {/* <Coin3D
+        coinFlipped={coinFlipped}
+        coinTossResult={coinTossResult}
+        coinSideSelection={coinSideSelection}
+        setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
+        setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
+      /> */}
+      <Coin2D
+        coinFlipped={coinFlipped}
+        coinTossResult={coinTossResult}
+        coinSideSelection={coinSideSelection}
+        setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
+        setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
       />
     </div>
   );

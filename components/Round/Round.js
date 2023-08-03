@@ -65,11 +65,10 @@ const Round = ({ setIsGameStarted }) => {
     }
   };
 
-  const getCoinSpin = () => setCoinFlipped((state) => !state);
-
   const makeCoinToss = () => {
+
     const makeCoinTossActions = () => {
-      getCoinSpin();
+     setCoinFlipped(true);
 
       if (coinSideSelection) setCoinSideSelection(null);
       if (roundCount === 1 && coinTossCount === 0) removeStatistic();
@@ -163,6 +162,7 @@ const Round = ({ setIsGameStarted }) => {
               coinFlipped={coinFlipped}
               coinTossResult={coinTossResult}
               coinSideSelection={coinSideSelection}
+              setCoinFlipped={setCoinFlipped}
               setShowCoinTossChoiceButtons={setShowCoinTossChoiceButtons}
               setShowCoinSideChoiceButtons={setShowCoinSideChoiceButtons}
             />

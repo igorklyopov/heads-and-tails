@@ -18,14 +18,12 @@
 
   border-radius: 50%;
   will-change: transform, opacity;
-
-   
 }
 
 .tails,
 .heads,
 .unknown {
-  background-color: var(--primary-bg-dark-shade); 
+  background-color: var(--primary-bg-dark-shade);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
