@@ -36,12 +36,12 @@ const Round = ({ setIsGameStarted }) => {
   const { volume, soundOn } = useSoundManager();
 
   useEffect(() => {
-    setAudioPlayVolume(volume);
-  }, [setAudioPlayVolume, volume]);
-
-  useEffect(() => {
-    if (soundOn) return stopAudioPlay;
-  }, [soundOn, stopAudioPlay]);
+    if (soundOn) {
+      setAudioPlayVolume(volume);
+      return stopAudioPlay;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [volume, soundOn]);
 
   const startRound = () => {
     const startRoundActions = () => {
@@ -115,10 +115,6 @@ const Round = ({ setIsGameStarted }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coinTossCount]);
 
-  useEffect(() => {
-    setIsPlayerGuessed(coinSideSelection === coinTossResult);
-  }, [coinSideSelection, coinTossResult]);
-
   const selectCoinSide = (e) => {
     const selectCoinSideActions = () => {
       setCoinSideSelection(e.target.value);
@@ -143,13 +139,30 @@ const Round = ({ setIsGameStarted }) => {
   };
 
   useEffect(() => {
+    setIsPlayerGuessed(coinSideSelection === coinTossResult);
+  }, [coinSideSelection, coinTossResult]);
+
+  useEffect(() => {
+    if (soundOn && coinSideSelection) {
+      setAudioPlayVolume(volume);
+      playAudio(isPlayerGuessed ? SOUNDS.win : SOUNDS.loss);
+      onPlayAudioEnd(() => {
+        stopAudioPlay();
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coinSideSelection, isPlayerGuessed, soundOn, volume]);
+
+  useEffect(() => {
     if (soundOn && showRoundStatistic) {
       playAudio(SOUNDS.showStatistic);
       onPlayAudioEnd(() => {
         stopAudioPlay();
       });
     }
-  }, [onPlayAudioEnd, playAudio, showRoundStatistic, soundOn, stopAudioPlay]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showRoundStatistic, soundOn]);
 
   return (
     <Container>

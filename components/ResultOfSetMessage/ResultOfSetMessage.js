@@ -1,22 +1,6 @@
-import { useAudio } from '../../utils/useAudio';
-import { useSoundManager } from '../../utils/useSoundManager';
-import { SOUNDS } from '../../utils/gameConstants';
-
 import styles from './ResultOfSetMessage.module.scss';
 
 const ResultOfSetMessage = ({ isPlayerGuessed }) => {
-  const { playAudio, stopAudioPlay, onPlayAudioEnd, setAudioPlayVolume } =
-    useAudio();
-  const { volume, soundOn } = useSoundManager();
-
-  if (soundOn) {
-    setAudioPlayVolume(volume);
-    playAudio(isPlayerGuessed ? SOUNDS.win : SOUNDS.loss);
-    onPlayAudioEnd(() => {
-      stopAudioPlay();
-    });
-  }
-
   return (
     <p className={styles.message}>
       {isPlayerGuessed ? (

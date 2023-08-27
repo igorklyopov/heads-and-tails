@@ -5,6 +5,7 @@ import { CameraControls } from '@react-three/drei';
 
 import CoinModel from './CoinModel';
 
+
 const Coin3D = ({
   coinFlipped,
   coinTossResult,
@@ -26,6 +27,8 @@ const Coin3D = ({
     primaryBgDarkShade: '#4d5561',
     primaryBgDark: '#434b57',
   };
+
+  
 
   return (
     <Canvas
